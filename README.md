@@ -9,17 +9,31 @@ methods:
 * **readAsDataUrl()**: Reads the file as a String and converts it to a
    Data:URL
 
+An example using ```async``` and ```await```:
+
+```
+  Future readFile(File file) async {
+    HtmlFile f = new HtmlFile(file);
+    String s = await f.readAsString();
+    showFile(f, s);
+  }
+```
+
+
 #### FileStream
 A class that wraps the File class, but provides the ability to read a
 File as a _Stream_ of chunks.
 
-    Future readFileStream(File file) async {
-      var stream = new FileStream(file);
-      await for (Uint8List blob in stream) {
-        process(blob);
-      }
-    }
+An example using ```async``` and ```await for```:
 
+```
+  Future readFileStream(File file) async {
+    var stream = new FileStream(file);
+    await for (Uint8List blob in stream) {
+      process(blob);
+    }
+  }
+```
 
 
 

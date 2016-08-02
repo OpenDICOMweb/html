@@ -15,11 +15,15 @@ import 'package:odwhtml/file_io.dart';
 void main() {
   FileUploadInputElement input = querySelector('#input-upload');
   OutputElement output = querySelector('output');
- // FileList files;
+  // FileList files;
 
   Future readFile(File file) async {
     HtmlFile f = new HtmlFile(file);
     String s = await f.readAsString();
+    showFile(f, s);
+  }
+
+  void showFile(HtmlFile file, String s) {
     String html = markdownToHtml(s);
     output.innerHtml = '''
 <div> <strong>file.name</strong></div>
@@ -31,6 +35,7 @@ void main() {
 </ul>
 <div>$html</div>''';
   }
+
 
   void onFileInputChange(Event e) {
     FileUploadInputElement input = e.target;

@@ -32,7 +32,10 @@ class HtmlFile {
   String get type => (file.type == null) ? "n/a" : sanitize(file.type);
   int    get size => file.size;
   int    get lastModified => file.lastModified;
-  String get date => (file.lastModifiedDate == null) ? "n/a" : file.lastModifiedDate.toString();
+  String get lastModifiedDate =>
+      (file.lastModifiedDate == null)
+      ? "n/a"
+      : file.lastModifiedDate.toString();
 
   // Do we need onAbort?  Should we be using onLoad rather than onLoadEnd
   void _onLoad(ProgressEvent e) {
