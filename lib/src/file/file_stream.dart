@@ -9,27 +9,14 @@ import 'dart:async';
 import 'dart:html';
 import 'dart:typed_data';
 
-//TODO: finish testing, cleanup, and document
+//TODO: finish unit tests
+//TODO: remove print statements when unit tests complete.
+//TODO: create corresponding HttpStream
+//TODO: create FileSink, HttpSink
 
-typedef void CallbackHandler(Event e);
+//TODO: later create corresponding FileStreams (etc.) for Strings, Lines, DataURLs.
 
-class ReaderState {
-  final String name;
-  final int value;
-
-  const ReaderState(this.name, this.value);
-
-  isEmpty(int readyState) => readyState == 0;
-  isLoading(int readyState) => readyState == 1;
-  isDone(int readyState) => readyState == 2;
-
-  static const empty = const ReaderState("Empty", 0);
-  static const loading = const ReaderState("Loading", 1);
-  static const done = const ReaderState("Done", 2);
-
-  String toString() => name;
-}
-
+/// A [Stream] of [Uint8List]s (chunks).
 class FileStream extends Stream {
   static const defaultChunkSize = 1024 * 1024;
   final FileReader reader = new FileReader();
@@ -37,10 +24,6 @@ class FileStream extends Stream {
   StreamSubscription<Uint8List> _subscription;
   final File file;
   final int chunkSize;
-  //TODO: next three should be private
-  CallbackHandler onLoad;
-  CallbackHandler onError;
-  CallbackHandler onProgress;
   int index = 0;
   bool _lengthComputable;
   int state;
@@ -120,19 +103,7 @@ class FileStream extends Stream {
   //TODO: needed?
   Future _onCancel() async => await _subscription.cancel();
 
-  // TODO: flush?
-  /*
-  void _onLoadStart(ProgressEvent e) {
-    state = reader.readyState;
-    //print('onLoadStart: state=$state started loading...');
-  }
-  */
-
-  //TODO: needed?
-  //void onLoad(ProgressEvent e) {
-  //  print('onLoad: state=$state loaded: $loaded');
-  //}
-
+  /// The default [onProgress] callback handler.
   void _onProgress(ProgressEvent e) {
     _progress += e.loaded;
     _lengthComputable = e.lengthComputable;
@@ -143,7 +114,7 @@ class FileStream extends Stream {
     }
   }
 
-  //TODO: remove print statements
+  /// The default [onLoad] callback handler.
   void _onLoad(ProgressEvent e) {
     var state = reader.readyState;
     _loaded += e.loaded;
@@ -160,6 +131,7 @@ class FileStream extends Stream {
     }
   }
 
+  /// The default [onError] callback handler.
   void _onError(e) {
     print("onError: ${reader.error}");
     return _controller.addError(reader.error);
