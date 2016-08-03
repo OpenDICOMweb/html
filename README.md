@@ -1,13 +1,13 @@
-### **HTML File I/O**
----
+HTML File I/O
+-------------
 #### HtmlFile
 A class that wraps the File class, but provides three simple read
 methods:
 
-* **readAsBytes**: Reads the file as a Uint8List
-* **readAsString()**: Reads the files as a String
+* **readAsBytes**: Reads the file as a [Uint8List]
+* **readAsString()**: Reads the files as a [String]
 * **readAsDataUrl()**: Reads the file as a String and converts it to a
-   Data:URL
+   [Data:URL]
 
 An example using ```async``` and ```await```:
 
@@ -22,7 +22,7 @@ An example using ```async``` and ```await```:
 
 #### FileStream
 A class that wraps the File class, but provides the ability to read a
-File as a _Stream_ of chunks.
+File as a [Stream] of [Uint8List]s (i.e. chunks).
 
 An example using ```async``` and ```await for```:
 

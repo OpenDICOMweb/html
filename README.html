@@ -1,0 +1,29 @@
+<h3><a href="#html-file-io" id="html-file-io" name="html-file-io"><span class="octicon octicon-link"></span><strong>HTML File I/O</strong></a></h3>
+<hr />
+<h4><a href="#htmlfile" id="htmlfile" name="htmlfile"><span class="octicon octicon-link"></span>HtmlFile</a></h4>
+<p>A class that wraps the File class, but provides three simple read
+  methods:</p>
+<ul>
+  <li><strong>readAsBytes</strong>: Reads the file as a [Uint8List]</li>
+  <li><strong>readAsString()</strong>: Reads the files as a [String]</li>
+  <li><strong>readAsDataUrl()</strong>: Reads the file as a String and converts it to a
+    [Data:URL]</li>
+</ul>
+<p>An example using <code>async</code> and <code>await</code>:</p>
+<pre><code>  Future readFile(File file) async {
+    HtmlFile f = new HtmlFile(file);
+    String s = await f.readAsString();
+    showFile(f, s);
+  }
+</code></pre>
+<h4><a href="#filestream" id="filestream" name="filestream"><span class="octicon octicon-link"></span>FileStream</a></h4>
+<p>A class that wraps the File class, but provides the ability to read a
+  File as a [Stream] of [Uint8List]s (i.e. chunks).</p>
+<p>An example using <code>async</code> and <code>await for</code>:</p>
+<pre><code>  Future readFileStream(File file) async {
+    var stream = new FileStream(file);
+    await for (Uint8List blob in stream) {
+      process(blob);
+    }
+  }
+</code></pre>

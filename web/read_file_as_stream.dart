@@ -10,6 +10,7 @@ import 'dart:typed_data';
 
 import 'package:odwhtml/file_io.dart';
 
+//TODO: need better example.  maybe create the data then read it.
 
 class FileInput {
   FileUploadInputElement input;
@@ -19,18 +20,7 @@ class FileInput {
 
   FileInput() {
     FileUploadInputElement input = querySelector('#input-upload');
-    //input.onClick.listen(clickHandler);
     input.onChange.listen(onFileInputChange);
-  }
-
-  void clickHandler(MouseEvent e) {
-    print('Mouse Click: ${e.target}');
-    FileUploadInputElement input = e.target;
-    FileList files = input.files;
-    for (File file in files) {
-      var i = readFileStream(file);
-      print('clickHandler: File $file, size:${file.size}, count: $i');
-    }
   }
 
   void onFileInputChange(Event e) {
@@ -67,14 +57,6 @@ class FileInput {
 
 
 void main() {
-
-  /*
-  Stream<Uint8List> readFile(File file) {
-    HttpFile httpFile= new HttpFile(file);
-    Stream<Uint8List> stream = httpFile.read();
-    return stream;
-  }
-  */
 
   new FileInput();
 

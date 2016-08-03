@@ -6,7 +6,6 @@
 
 import 'dart:async';
 import 'dart:html';
-import 'dart:typed_data';
 
 import 'package:markdown/markdown.dart';
 
@@ -15,16 +14,13 @@ import 'package:odwhtml/file_io.dart';
 void main() {
   FileUploadInputElement input = querySelector('#input-upload');
   OutputElement output = querySelector('output');
-  // FileList files;
+  File file;
 
-  Future readFile(File file) async {
-    HtmlFile f = new HtmlFile(file);
-    String s = await f.readAsString();
-    showFile(f, s);
-  }
-
+  // Set the [innerHtml] for the [OutputElement].
   void showFile(HtmlFile file, String s) {
     String html = markdownToHtml(s);
+    print('markdown: $html');
+    var odw = '<small><p><strong>Open DICOM<em>web</em> Project</strong></p></small>';
     output.innerHtml = '''
 <div> <strong>file.name</strong></div>
 </ul>
@@ -33,19 +29,22 @@ void main() {
   <li>last modified date: ${file.lastModifiedDate}</li>
   <li>text:</li>
 </ul>
-<div>$html</div>''';
+<div>$odw$html</div>''';
   }
 
-
-  void onFileInputChange(Event e) {
+  // Handle [FileUploadInputElement] change event.
+  Future onFileInputChange(Event e) async {
     FileUploadInputElement input = e.target;
     FileList files = input.files;
     print('File Input Change: $files');
-    File file = files[0];
-    readFile(file);
+    file = files[0];
+    HtmlFile f = new HtmlFile(file);
+    showFile(f, await f.readAsString());
   }
 
+  // Add listener to [input].
   input.onChange.listen(onFileInputChange);
+
 }
 
 

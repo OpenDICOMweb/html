@@ -3,7 +3,7 @@
 // that can be found in the LICENSE file.
 // Author: Jim Philbin <jfphilbin@gmail.edu> -
 // See the AUTHORS file for other contributors.
-library odw.sdk.html.file;
+library odw.sdk.html.file.file_read;
 
 import 'dart:async';
 import 'dart:convert';
@@ -12,12 +12,10 @@ import 'dart:typed_data';
 
 //TODO: document
 //TODO: unit tests
-//TODO: as writeAsBytes, String, DataUrl
-//TODO: add a FileSystem argument
+
 
 //TODO: is there a better name for this class?
 /// A wrapper for [dart:html] [File]s.  The methods return [Future]s.
-
 class HtmlFile {
   static String percentEncode(String s) => HTML_ESCAPE.convert(s);
   final FileReader reader = new FileReader();
@@ -96,6 +94,8 @@ class HtmlFile {
     reader.readAsDataUrl(file);
     return completer.future;
   }
+
+
 
   toHtml() =>
       '<span><strong>${file.name}</strong> ($type) $size bytes, last modified: $lastModifiedDate</span>';
