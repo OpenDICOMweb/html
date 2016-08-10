@@ -4,11 +4,7 @@
 // Original author: Jim Philbin <jfphilbin@gmail.edu> - 
 // See the AUTHORS file for other contributors.
 
-/// A library for reading files. Using Dart's [html] library.
+/// A library for reading files. Using Dart's [dart:html] library.
 
-/// A [Future]s based library for reading a whole [File].
 export 'package:odwhtml/src/file/file.dart';
-
-/// A [Stream] based library for reading a [File] as a [Stream]
-/// of [Uint8List]s.
 export 'package:odwhtml/src/file/file_stream.dart';

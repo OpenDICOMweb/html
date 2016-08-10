@@ -3,7 +3,6 @@
 // that can be found in the LICENSE file.
 // Author: Jim Philbin <jfphilbin@gmail.edu> -
 // See the AUTHORS file for other contributors.
-library odw.sdk.client.file.file_stream ;
 
 import 'dart:async';
 import 'dart:html';
@@ -11,12 +10,11 @@ import 'dart:typed_data';
 
 //TODO: finish unit tests
 //TODO: remove print statements when unit tests complete.
-//TODO: create corresponding HttpStream
-//TODO: create FileSink, HttpSink
+//TODO: create corresponding HttpStream and HttpSink
 
-//TODO: later create corresponding FileStreams (etc.) for Strings, Lines, DataURLs.
-
-/// A [Stream] of [Uint8List]s (chunks).
+/// A [stream of [Uint8List] chunks read from a [File].
+///
+/// For use with the 'dart:html' package.
 class FileStream extends Stream {
   static const defaultChunkSize = 1024 * 1024;
   final FileReader reader = new FileReader();

@@ -3,7 +3,6 @@
 // that can be found in the LICENSE file.
 // Author: Jim Philbin <jfphilbin@gmail.edu> -
 // See the AUTHORS file for other contributors.
-library odw.sdk.html.file.file_read;
 
 import 'dart:async';
 import 'dart:convert';
@@ -13,6 +12,8 @@ import 'dart:typed_data';
 //TODO: document
 //TODO: unit tests
 
+/// A [Future]s based library for reading a whole [File].
+/// from a browser asynchronously.
 
 //TODO: is there a better name for this class?
 /// A wrapper for [dart:html] [File]s.  The methods return [Future]s.
