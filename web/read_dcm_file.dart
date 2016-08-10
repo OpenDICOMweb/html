@@ -14,15 +14,14 @@ import 'dart:async';
 import 'dart:html';
 import 'dart:typed_data';
 
-import 'package:core/dataset_sop.dart';
-import 'package:convert/dcm.dart';
-//import 'package:logger/logger.dart';
+import 'package:core/dicom.dart';
+import 'package:convert/dicom.dart';
+import 'package:logger/logger.dart';
 
 import 'package:odwhtml/src/file/file.dart';
 
 void main() {
-  //Logger log = new Logger("main", Level.info);
-  //System.init(log);
+  Logger log = new Logger("main", Level.info);
   FileUploadInputElement input = querySelector('#input-upload');
   OutputElement output = querySelector('output');
   File file;
@@ -35,21 +34,20 @@ void main() {
     file = files[0];
     HtmlFile f = new HtmlFile(file);
 
-    //TODO: log.config('Reading file: $file');
+    log.config('Reading file: $file');
     Uint8List bytes = await f.readAsBytes();
 
-   DcmDecoder decoder = new DcmDecoder(bytes);
+    DcmDecoder decoder = new DcmDecoder(bytes);
     print('decoder: $decoder');
 
-   Instance instance = decoder.readSopInstance(file.name);
+    Instance instance = decoder.readSopInstance(file.name);
     print('main:instance: $instance');
     Study study = instance.study;
     print('main:study: $study');
     Format fmt = new Format();
     var s = fmt.study(study);
-    output.innerHtml = '<pre><code><span>Foo</span></code></pre>';
-  //  print(s);
-
+    output.innerHtml = '<pre><code><span>$s</span></code></pre>';
+    print(s);
   }
 
   // Add listener to [input].
