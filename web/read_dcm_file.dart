@@ -14,7 +14,7 @@ import 'dart:async';
 import 'dart:html';
 import 'dart:typed_data';
 
-import 'package:core/dicom.dart';
+import 'package:core/core.dart';
 import 'package:convert/dicom.dart';
 import 'package:logger/logger.dart';
 
@@ -44,10 +44,10 @@ void main() {
     print('main:instance: $instance');
     Study study = instance.study;
     print('main:study: $study');
-    Format fmt = new Format();
-    var s = fmt.study(study);
-    output.innerHtml = '<pre><code><span>$s</span></code></pre>';
-    print(s);
+    //Format fmt = new Format();
+    //var s = fmt.study(study);
+    output.innerHtml = '<pre><code><span>$study</span></code></pre>';
+    print(study);
   }
 
   // Add listener to [input].
